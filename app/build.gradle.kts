@@ -10,10 +10,10 @@ android {
 
     defaultConfig {
         applicationId = "com.urb.poemscollection"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 33
-        versionCode = 4
-        versionName = "1.4"
+        versionCode = 6
+        versionName = "2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

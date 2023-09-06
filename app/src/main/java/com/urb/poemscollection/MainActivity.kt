@@ -90,8 +90,6 @@ class MainActivity : AppCompatActivity() {
         myfav.setOnClickListener {
 
             showInterAds()
-//            val intent= Intent(this,Favorites::class.java)
-//            startActivity(intent)
         }
 
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener,
@@ -186,10 +184,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-                //Toast.makeText(this@MainActivity,"Ad close", Toast.LENGTH_SHORT).show()
-            }
+                 }
 
             override fun onAdFailedToLoad(adError : LoadAdError) {
                 // Code to be executed when an ad request fails.
