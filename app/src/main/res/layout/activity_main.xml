@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/vvvvvvvvvv"
+    tools:context=".MainActivity">
+<RelativeLayout
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardd">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_toStartOf="@id/myfav"
+            android:background="@color/mycolor"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#fbf7eb"
+            app:cardCornerRadius="12dp"
+            android:elevation="8dp"
+            >
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:queryHint="Search here..."
+                app:iconifiedByDefault="false"
+                app:queryBackground="@android:color/transparent">
+
+            </androidx.appcompat.widget.SearchView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/myfav"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/touch">
+
+    </ImageView>
+</RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/r_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/itemview_grid"
+        tools:layoutManager="GridLayoutManager"
+        tools:spanCount="2"
+        android:layout_below="@id/cardd"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/mycolor2">
+
+    </ProgressBar>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-2929786513595384/5932780777">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/networkLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:layout_margin="15dp"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/aclonica"
+            android:layout_centerInParent="true"
+            android:textColor="@color/my_light_primary"
+            android:text="Unable to connect to Internet. Please check your network setting.">
+
+        </TextView>
+        <Button
+            android:id="@+id/retry_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:padding="10dp"
+            android:text="Retry"
+            android:textColor="@color/my_light_primary"
+            android:background="@drawable/roundcircle"
+            >
+
+        </Button>
+    </RelativeLayout>
+</RelativeLayout>

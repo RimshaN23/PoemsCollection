@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1048581906853",
+    "project_id": "poems-collection-a8aad",
+    "storage_bucket": "poems-collection-a8aad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048581906853:android:6697767a510aa4aa63884c",
+        "android_client_info": {
+          "package_name": "com.urb.poemscollection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048581906853-h2g1gb67cbftbme0qnmn88s988lhqelv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.urb.poemscollection",
+            "certificate_hash": "d1d4a1421037364616f856d271881d59967a84a0"
+          }
+        },
+        {
+          "client_id": "1048581906853-5hqpr1qloisgmvt0926t1a4131esnu90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA543P5PSj_n2nt034GJdgM-OWEv95uuU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048581906853-5hqpr1qloisgmvt0926t1a4131esnu90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
