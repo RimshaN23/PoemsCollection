@@ -59,7 +59,7 @@ class FavAdapter(var context: Context, var arrayList: ArrayList<FavModel>):Recyc
 //            intent.putExtra("videoUri", videoUri)
 //            context.startActivity(intent)
 
-            showInterAds()
+            showInterAds(videoUri)
         }
 
         holder.fav.setOnClickListener {
@@ -92,7 +92,7 @@ class FavAdapter(var context: Context, var arrayList: ArrayList<FavModel>):Recyc
 
     }
 
-    private fun showInterAds() {
+    private fun showInterAds(videoUri: String?) {
 
         if (mInterstitialAd!= null){
 
@@ -100,7 +100,7 @@ class FavAdapter(var context: Context, var arrayList: ArrayList<FavModel>):Recyc
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
                     val intent=Intent(context,VideoPlayer::class.java)
-                    intent.putExtra("videoUri", uri)
+                    intent.putExtra("videoUri", videoUri)
                     context.startActivity(intent)
 
                 }
@@ -109,7 +109,7 @@ class FavAdapter(var context: Context, var arrayList: ArrayList<FavModel>):Recyc
                     super.onAdFailedToShowFullScreenContent(p0)
 
                     val intent=Intent(context,VideoPlayer::class.java)
-                    intent.putExtra("videoUri", uri)
+                    intent.putExtra("videoUri", videoUri)
                     context.startActivity(intent)
 
                 }
@@ -128,7 +128,7 @@ class FavAdapter(var context: Context, var arrayList: ArrayList<FavModel>):Recyc
         }
         else{
             val intent=Intent(context,VideoPlayer::class.java)
-            intent.putExtra("videoUri", uri)
+            intent.putExtra("videoUri", videoUri)
             context.startActivity(intent)
 
         }

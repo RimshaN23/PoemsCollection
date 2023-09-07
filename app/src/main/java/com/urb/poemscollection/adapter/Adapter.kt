@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,6 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.squareup.picasso.Picasso
-import com.urb.poemscollection.Favorites
 import com.urb.poemscollection.R
 import com.urb.poemscollection.VideoPlayer
 import com.urb.poemscollection.database.DbHelper
@@ -30,6 +30,7 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
 
     private var mInterstitialAd: InterstitialAd? = null
     var uri: String?= null
+    var nam: String?= null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -47,8 +48,6 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
         val thumbnail: String? =item.thumbnail
         var videoUri: String? =item.videoUri
 
-        uri= videoUri
-
         val imgUri: Uri= Uri.parse(thumbnail)
 
         holder.name.text= name
@@ -57,7 +56,9 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
         loadIntersial()
 
         holder.card.setOnClickListener {
-            showInterAds()
+            Log.e("videoName",nam.toString())
+            Log.e("videoUri",uri.toString())
+            showInterAds(videoUri)
 //            val intent=Intent(context,VideoPlayer::class.java)
 //            intent.putExtra("videoUri", videoUri)
 //            context.startActivity(intent)
@@ -95,7 +96,10 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
 
         notifyDataSetChanged()
     }
-    private fun showInterAds() {
+    private fun showInterAds(videoUri: String?) {
+
+        Log.e("videoName2",nam.toString())
+        Log.e("videoUri2",uri.toString())
 
         if (mInterstitialAd!= null){
 
@@ -103,7 +107,7 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
                     val intent=Intent(context,VideoPlayer::class.java)
-                    intent.putExtra("videoUri", uri)
+                    intent.putExtra("videoUri", videoUri)
                     context.startActivity(intent)
 
                 }
@@ -111,7 +115,7 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
                 override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                     super.onAdFailedToShowFullScreenContent(p0)
                     val intent=Intent(context,VideoPlayer::class.java)
-                    intent.putExtra("videoUri", uri)
+                    intent.putExtra("videoUri", videoUri)
                     context.startActivity(intent)
 
                 }
@@ -130,7 +134,7 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
         }
         else{
             val intent=Intent(context,VideoPlayer::class.java)
-            intent.putExtra("videoUri", uri)
+            intent.putExtra("videoUri", videoUri)
             context.startActivity(intent)
 
         }
