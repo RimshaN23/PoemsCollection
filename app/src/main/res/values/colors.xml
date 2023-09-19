@@ -7,6 +7,7 @@
     <color name="mycolor">#31EBD595</color>
     <color name="mycolor2">#9C27B0</color>
     <color name="card_color">#fbf7eb</color>
+    <color name="alert_color">#F1E7C9</color>
     <color name="my_light_primary">#a545a6</color>
 
 </resources>

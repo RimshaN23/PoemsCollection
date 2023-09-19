@@ -50,7 +50,8 @@ class FavAdapter(var context: Context, var arrayList: ArrayList<FavModel>):Recyc
         val imgUri: Uri = Uri.parse(thumbnail)
         uri= videoUri
         holder.name.text= name
-        Picasso.get().load(imgUri).into(holder.thumbnail)
+        holder.thumbnail.setImageURI(imgUri)
+        //Picasso.get().load(imgUri).into(holder.thumbnail)
 
         loadIntersial()
 
@@ -58,6 +59,7 @@ class FavAdapter(var context: Context, var arrayList: ArrayList<FavModel>):Recyc
 //            val intent= Intent(context, VideoPlayer::class.java)
 //            intent.putExtra("videoUri", videoUri)
 //            context.startActivity(intent)
+            Log.e("MyvideoPathfav", videoUri.toString())
 
             showInterAds(videoUri)
         }

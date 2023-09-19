@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.ScrollView
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: Adapter
     lateinit var recyclerView: RecyclerView
     lateinit var progressBar: ProgressBar
+    lateinit var alert: LinearLayout
     lateinit var searchView: androidx.appcompat.widget.SearchView
 
 
@@ -80,13 +82,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         recyclerView = findViewById<RecyclerView>(R.id.r_view)
+
         progressBar= findViewById(R.id.progressbar)
+        alert= findViewById(R.id.alertdialog)
+        alert.visibility= View.GONE
 
         loadData()
-        progressBar.visibility= View.GONE
 
 
         val myfav= findViewById<ImageView>(R.id.myfav)
+        val myfavOff= findViewById<ImageView>(R.id.myfavOffline)
+
+        myfavOff.setOnClickListener {
+
+            val intent= Intent(this@MainActivity,Favorites::class.java)
+            startActivity(intent)
+
+        }
         myfav.setOnClickListener {
 
             showInterAds()
@@ -255,7 +267,7 @@ class MainActivity : AppCompatActivity() {
 
                     val layoutManager = GridLayoutManager(baseContext, 2)
 
-                    adapter= Adapter(this@MainActivity, arrayList, progressBar)
+                    adapter= Adapter(this@MainActivity, arrayList, alert)
                     recyclerView.adapter= adapter
                     recyclerView.layoutManager= layoutManager
 

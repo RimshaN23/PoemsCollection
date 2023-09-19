@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -20,17 +21,22 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import com.urb.poemscollection.R
 import com.urb.poemscollection.VideoPlayer
 import com.urb.poemscollection.database.DbHelper
 import com.urb.poemscollection.model.PoemsModel
+import java.io.File
 
-class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progressBar: ProgressBar):RecyclerView.Adapter<Adapter.ViewHolder>()  {
+class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progressBar: LinearLayout):RecyclerView.Adapter<Adapter.ViewHolder>()  {
 
     private var mInterstitialAd: InterstitialAd? = null
     var uri: String?= null
     var nam: String?= null
+     var imgPath: String = ""
+    var videoPath: String = ""
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -46,7 +52,7 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
         val id: String? =item.id
         val name: String? =item.name
         val thumbnail: String? =item.thumbnail
-        var videoUri: String? =item.videoUri
+        val videoUri: String? =item.videoUri
 
         val imgUri: Uri= Uri.parse(thumbnail)
 
@@ -70,11 +76,11 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
             if (!name?.let { it1 -> db.isNameExists(it1) }!!) {
                 // Name does not exist, add the new record
                 if (thumbnail != null && videoUri != null) {
-                    db.addFav(
-                        name,thumbnail,videoUri
-                    )
+//                    db.addFav(
+//                        name,thumbnail,videoUri
+//                    )
+                    downloadVideo(name)
 
-                    Toast.makeText(context, "Added to Favorites successfully", Toast.LENGTH_SHORT).show();
 
                 }
             } else {
@@ -84,8 +90,81 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
 
 
         }
+        
+//        holder.download.setOnClickListener {
+//            if (name != null) {
+//                downloadVideo(name)
+//            }
+//        }
 
     }
+
+    private fun downloadVideo(name: String) {
+
+        progressBar.visibility= View.VISIBLE
+
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference
+
+        val videoPathAndName = "Poems/video_$name"
+        val imgPathAndName = "Image/video_$name"
+
+        // Create a reference to the video in Firebase Storage
+        val videoRef = storageRef.child(videoPathAndName)
+        val imgRef = storageRef.child(imgPathAndName)
+
+// Define a local file where the video will be saved
+        val videoFile = File(context.filesDir, "video_$name.mp4")
+        val imgFile = File(context.filesDir, "video_$name.jpeg")
+
+        // Download the video to the local file
+        videoRef.getFile(videoFile).addOnSuccessListener {
+            // Video download success
+
+            videoPath = videoFile.absolutePath
+            Toast.makeText(context, "Video downloads", Toast.LENGTH_SHORT).show();
+
+            Log.e("MyvideoPath", videoPath)
+            progressBar.visibility= View.GONE
+
+            imgRef.getFile(imgFile).addOnSuccessListener {
+                // Video download success
+                imgPath = imgFile.absolutePath
+
+                val db= DbHelper(context)
+                val image= imgPath
+                val video = videoPath
+                Log.e("MyvideoPath2", video+" "+name+ " "+image)
+
+
+                db.addFav(name, imgPath,videoPath)
+
+
+                progressBar.visibility= View.GONE
+
+            }.addOnFailureListener { exception ->
+                // Handle the download failure
+
+                Log.e("WhyFailImg", exception.message.toString())
+                Toast.makeText(context, "Image downloading Fails"+exception.message, Toast.LENGTH_SHORT).show();
+
+                progressBar.visibility= View.GONE
+            }
+
+
+            // Now, you can proceed to save this videoPath in your SQLite database.
+        }.addOnFailureListener { exception ->
+            // Handle the download failure
+            Log.e("WhyFailVideo", exception.message.toString())
+
+            Toast.makeText(context, "Video downloading Fails"+exception.message, Toast.LENGTH_SHORT).show();
+
+            progressBar.visibility= View.GONE
+        }
+     // Download the video to the local file
+
+    }
+
     fun onDataChanged() {
         progressBar.visibility= View.GONE
     }
@@ -162,6 +241,7 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
         var name: TextView = itemView.findViewById(R.id.title)
         var card: CardView = itemView.findViewById(R.id.cardview)
         var fav: ImageView= itemView.findViewById(R.id.add_fav)
+     //   var download: ImageView= itemView.findViewById(R.id.download)
     }
 
 }

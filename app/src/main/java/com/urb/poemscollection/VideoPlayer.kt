@@ -34,6 +34,7 @@ class VideoPlayer : AppCompatActivity() {
 
         val uri = intent.extras!!.getString("videoUri")
 
+
       //  "android.resource://$packageName" + "/" + R.raw.babyshark
         val videoUri = Uri.parse(uri) // Replace with your video URI
 
