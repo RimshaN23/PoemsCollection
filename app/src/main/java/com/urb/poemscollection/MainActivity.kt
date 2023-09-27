@@ -100,8 +100,10 @@ class MainActivity : AppCompatActivity() {
 
         }
         myfav.setOnClickListener {
+            val intent= Intent(this@MainActivity,Favorites::class.java)
+            startActivity(intent)
 
-            showInterAds()
+    //        showInterAds()
         }
 
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener,
@@ -120,64 +122,64 @@ class MainActivity : AppCompatActivity() {
         })
 
         loadBanner()
-        loadIntersial()
+    //    loadIntersial()
 
     }
 
-    private fun showInterAds() {
+//    private fun showInterAds() {
+//
+//        if (mInterstitialAd!= null){
+//
+//            mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+//                override fun onAdDismissedFullScreenContent() {
+//                    super.onAdDismissedFullScreenContent()
+//
+//                    val intent= Intent(this@MainActivity,Favorites::class.java)
+//                    startActivity(intent)
+//                }
+//
+//                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+//                    super.onAdFailedToShowFullScreenContent(p0)
+//
+//
+//                    val intent= Intent(this@MainActivity,Favorites::class.java)
+//                    startActivity(intent)
+//                }
+//
+//                override fun onAdImpression() {
+//                    super.onAdImpression()
+//                }
+//
+//                override fun onAdShowedFullScreenContent() {
+//                    super.onAdShowedFullScreenContent()
+//                }
+//
+//            }
+//
+//            mInterstitialAd?.show(this)
+//        }
+//        else{
+//
+//            val intent= Intent(this,Favorites::class.java)
+//            startActivity(intent)
+//        }
+//
+//    }
 
-        if (mInterstitialAd!= null){
-
-            mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-                override fun onAdDismissedFullScreenContent() {
-                    super.onAdDismissedFullScreenContent()
-
-                    val intent= Intent(this@MainActivity,Favorites::class.java)
-                    startActivity(intent)
-                }
-
-                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                    super.onAdFailedToShowFullScreenContent(p0)
-
-
-                    val intent= Intent(this@MainActivity,Favorites::class.java)
-                    startActivity(intent)
-                }
-
-                override fun onAdImpression() {
-                    super.onAdImpression()
-                }
-
-                override fun onAdShowedFullScreenContent() {
-                    super.onAdShowedFullScreenContent()
-                }
-
-            }
-
-            mInterstitialAd?.show(this)
-        }
-        else{
-
-            val intent= Intent(this,Favorites::class.java)
-            startActivity(intent)
-        }
-
-    }
-
-    private fun loadIntersial() {
-        val adRequest = AdRequest.Builder().build()
-
-        InterstitialAd.load(this,"ca-app-pub-2929786513595384/9902695813",
-            adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                mInterstitialAd = null
-            }
-
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                mInterstitialAd = interstitialAd
-            }
-        })
-    }
+//    private fun loadIntersial() {
+//        val adRequest = AdRequest.Builder().build()
+//
+//        InterstitialAd.load(this,"ca-app-pub-2929786513595384/9902695813",
+//            adRequest, object : InterstitialAdLoadCallback() {
+//            override fun onAdFailedToLoad(adError: LoadAdError) {
+//                mInterstitialAd = null
+//            }
+//
+//            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+//                mInterstitialAd = interstitialAd
+//            }
+//        })
+//    }
 
 
     private fun loadBanner() {

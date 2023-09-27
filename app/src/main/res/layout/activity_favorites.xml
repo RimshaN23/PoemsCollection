@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +11,7 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarincme"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/my_light_primary"
@@ -45,14 +45,24 @@
         android:id="@+id/fav_view"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:listitem="@layout/itemview"
 
-        android:layout_below="@id/home"
+        android:layout_below="@id/toolbar"
         >
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-2929786513595384/5932780777">
+
+    </com.google.android.gms.ads.AdView>
 
 
-</LinearLayout>
+</RelativeLayout>

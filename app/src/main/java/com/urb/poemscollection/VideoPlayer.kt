@@ -3,30 +3,41 @@ package com.urb.poemscollection
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.MediaController
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
+
 class VideoPlayer : AppCompatActivity() {
 
     private lateinit var videoView: VideoView
-    var isfullscreen= false
+    var isfullscreen= true
 
     lateinit var progressBar: ProgressBar
+    lateinit var layout: RelativeLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_player)
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+
 
         videoView = findViewById(R.id.videoView)
         progressBar= findViewById(R.id.progressbar1)
 
         val fullscreen = findViewById<ImageView>(R.id.fullscreen)
-   //     val videoUri = Uri.parse("https://www.dailymotion.com/video/x53wb20") // Replace with your video URI
+        val back = findViewById<ImageView>(R.id.back)
+         layout= findViewById<RelativeLayout>(R.id.layout)
 
+////////////////        showButtonAfterDelay()
 
         val mediaController = MediaController(this)
         mediaController.setAnchorView(videoView)
@@ -44,8 +55,16 @@ class VideoPlayer : AppCompatActivity() {
         videoView.setOnPreparedListener {
             progressBar.visibility= View.GONE
         }
+//        videoView.setMediaController(object : MediaController(this) {
+//            override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+//                if (event.keyCode == KeyEvent.KEYCODE_BACK) (context as Activity).finish()
+//                return super.dispatchKeyEvent(event)
+//            }
+//        })
 
-
+        back.setOnClickListener {
+            finish()
+        }
 
         fullscreen.setOnClickListener {
             if (!isfullscreen)
@@ -63,4 +82,30 @@ class VideoPlayer : AppCompatActivity() {
 
 
     }
+    private fun showButtonAfterDelay() {
+        // Delay for 3 seconds (adjust as needed)
+        val delayMillis = 3000L
+
+        layout.postDelayed({
+            layout.visibility = View.VISIBLE
+            hideButtonAfterDelay()
+        }, delayMillis)
+    }
+
+    private fun hideButtonAfterDelay() {
+        // Delay for 3 seconds (adjust as needed)
+        val delayMillis = 3000L
+
+        layout.postDelayed({
+            layout.visibility = View.INVISIBLE // or View.GONE if you prefer
+        }, delayMillis)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        // When the screen is touched, make the button visible again
+        layout.visibility = View.VISIBLE
+        hideButtonAfterDelay()
+        return super.onTouchEvent(event)
+    }
 }
+

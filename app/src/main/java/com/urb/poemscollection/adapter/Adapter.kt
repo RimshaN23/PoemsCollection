@@ -59,15 +59,15 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
         holder.name.text= name
         Picasso.get().load(imgUri).into(holder.thumbnail)
 
-        loadIntersial()
+//        loadIntersial()
 
         holder.card.setOnClickListener {
             Log.e("videoName",nam.toString())
             Log.e("videoUri",uri.toString())
-            showInterAds(videoUri)
-//            val intent=Intent(context,VideoPlayer::class.java)
-//            intent.putExtra("videoUri", videoUri)
-//            context.startActivity(intent)
+   //         showInterAds(videoUri)
+            val intent=Intent(context,VideoPlayer::class.java)
+            intent.putExtra("videoUri", videoUri)
+            context.startActivity(intent)
         }
 
         holder.fav.setOnClickListener {
@@ -175,65 +175,65 @@ class Adapter( var context: Context, var model: ArrayList<PoemsModel>, var progr
 
         notifyDataSetChanged()
     }
-    private fun showInterAds(videoUri: String?) {
+//    private fun showInterAds(videoUri: String?) {
+//
+//        Log.e("videoName2",nam.toString())
+//        Log.e("videoUri2",uri.toString())
+//
+//        if (mInterstitialAd!= null){
+//
+//            mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+//                override fun onAdDismissedFullScreenContent() {
+//                    super.onAdDismissedFullScreenContent()
+//                    val intent=Intent(context,VideoPlayer::class.java)
+//                    intent.putExtra("videoUri", videoUri)
+//                    context.startActivity(intent)
+//
+//                }
+//
+//                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+//                    super.onAdFailedToShowFullScreenContent(p0)
+//                    val intent=Intent(context,VideoPlayer::class.java)
+//                    intent.putExtra("videoUri", videoUri)
+//                    context.startActivity(intent)
+//
+//                }
+//
+//                override fun onAdImpression() {
+//                    super.onAdImpression()
+//                }
+//
+//                override fun onAdShowedFullScreenContent() {
+//                    super.onAdShowedFullScreenContent()
+//                }
+//
+//            }
+//
+//            mInterstitialAd?.show(context as Activity)
+//        }
+//        else{
+//            val intent=Intent(context,VideoPlayer::class.java)
+//            intent.putExtra("videoUri", videoUri)
+//            context.startActivity(intent)
+//
+//        }
+//
+//    }
 
-        Log.e("videoName2",nam.toString())
-        Log.e("videoUri2",uri.toString())
-
-        if (mInterstitialAd!= null){
-
-            mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-                override fun onAdDismissedFullScreenContent() {
-                    super.onAdDismissedFullScreenContent()
-                    val intent=Intent(context,VideoPlayer::class.java)
-                    intent.putExtra("videoUri", videoUri)
-                    context.startActivity(intent)
-
-                }
-
-                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                    super.onAdFailedToShowFullScreenContent(p0)
-                    val intent=Intent(context,VideoPlayer::class.java)
-                    intent.putExtra("videoUri", videoUri)
-                    context.startActivity(intent)
-
-                }
-
-                override fun onAdImpression() {
-                    super.onAdImpression()
-                }
-
-                override fun onAdShowedFullScreenContent() {
-                    super.onAdShowedFullScreenContent()
-                }
-
-            }
-
-            mInterstitialAd?.show(context as Activity)
-        }
-        else{
-            val intent=Intent(context,VideoPlayer::class.java)
-            intent.putExtra("videoUri", videoUri)
-            context.startActivity(intent)
-
-        }
-
-    }
-
-    private fun loadIntersial() {
-        val adRequest = AdRequest.Builder().build()
-
-        InterstitialAd.load(context,"ca-app-pub-2929786513595384/9902695813",
-            adRequest, object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    mInterstitialAd = null
-                }
-
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    mInterstitialAd = interstitialAd
-                }
-            })
-    }
+//    private fun loadIntersial() {
+//        val adRequest = AdRequest.Builder().build()
+//
+//        InterstitialAd.load(context,"ca-app-pub-2929786513595384/9902695813",
+//            adRequest, object : InterstitialAdLoadCallback() {
+//                override fun onAdFailedToLoad(adError: LoadAdError) {
+//                    mInterstitialAd = null
+//                }
+//
+//                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+//                    mInterstitialAd = interstitialAd
+//                }
+//            })
+//    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 

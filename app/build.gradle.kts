@@ -12,8 +12,8 @@ android {
         applicationId = "com.urb.poemscollection"
         minSdk = 24
         targetSdk = 33
-        versionCode = 7
-        versionName = "2.2"
+        versionCode = 10
+        versionName = "2.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
